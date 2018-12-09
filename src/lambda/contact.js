@@ -46,6 +46,13 @@ const savePerson = ({ name, email, message }) => {
 
 exports.handler = async event => {
   try {
+    if (event.httpMethod !== 'POST') {
+      return {
+        statusCode: 403,
+        body: 'METHOD "GET" IS NOT ALLOWED'
+      };
+    }
+
     const data = JSON.parse(event.body);
     await Promise.all([
       sendMail(data),
