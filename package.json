@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "airtable": "^0.5.8",
+    "contentful": "^7.0.5",
+    "mailgun-js": "^0.22.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-markdown": "^4.0.4",
     "react-scripts": "2.1.1"
   },
   "scripts": {
