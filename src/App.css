@@ -1,10 +1,17 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 30vmin;
+  margin: 1em;
 }
 
 .App-header {
@@ -29,4 +36,67 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+form {
+  width: 20em;
+}
+
+form input:not([type='checkbox']) {
+  width: 100%;
+  background: none;
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid #fff;
+  padding: 0.25em;
+  text-align: center;
+  font-size: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+input[type='checkbox'] {
+  margin: 0 auto;
+  display: block;
+}
+
+form span,
+form label {
+  display: block;
+  text-align: center;
+}
+
+form span {
+  font-size: 0.75em;
+  margin: 0.5em 0;
+}
+
+button {
+  background: #5adafd;
+  color: #0a4a7d;
+  box-shadow: 0 0.25em 0.75em #222;
+  font-size: 1em;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 1em;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid #fff;
+  padding: 0.5em;
+  font-size: 1.25em;
+  background: none;
+  color: #fff;
+}
+
+.notification {
+  position: absolute;
+  padding: 0.5em;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 0.25em 0.25em #222;
 }
