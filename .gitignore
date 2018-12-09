@@ -28,3 +28,6 @@ yarn-error.log*
 # netlify functions
 .netlify
 .functions
+
+# vscode
+.vscode
