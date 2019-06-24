@@ -1,25 +1,20 @@
-const Mailgun = require('mailgun-js');
+const sgMail = require('@sendgrid/mail');
 const Airtable = require('airtable');
 
-const sendThankYouEmail = async ({ email }) => {
+const sendThankYouEmail = async ({ email, message }) => {
   return new Promise((resolve, reject) => {
     console.log('Sending the email');
-    const { MG_API_KEY: apiKey, MG_DOMAIN: domain } = process.env;
-    const mailgun = Mailgun({
-      apiKey,
-      domain
-    });
 
-    const mailData = {
-      from: 'Stefan Judis <no-reply@stefanjudis.com>',
+    sgMail.setApiKey(process.env.SG_API_KEY);
+    const msg = {
       to: email,
-      subject: 'Thank you for your interest',
-      text: "I'll come back to you asap!"
+      from: 'no-reply@stefanjudis.com',
+      subject: 'Thank you!!!',
+      text: "I'll come back to you shortly"
     };
 
-    mailgun.messages().send(mailData, err => {
-      if (err) return reject(err);
-
+    sgMail.send(msg, false, err => {
+      if (err) reject(err);
       resolve();
     });
   });
@@ -27,13 +22,10 @@ const sendThankYouEmail = async ({ email }) => {
 
 const saveUser = async ({ name, email, message }) => {
   return new Promise((resolve, reject) => {
-    const { AT_API_KEY: apiKey, AT_BASE, AT_TABLE } = process.env;
+    const { AT_API_KEY, AT_BASE, AT_TABLE } = process.env;
 
-    Airtable.configure({
-      apiKey
-    });
+    const base = new Airtable({ apiKey: AT_API_KEY }).base(AT_BASE);
 
-    const base = Airtable.base(AT_BASE);
     base(AT_TABLE).create({ name, email, message }, err => {
       if (err) return reject(err);
 
@@ -51,13 +43,11 @@ exports.handler = async event => {
     if (data.receiveUpdates) {
       await saveUser(data);
     }
-    // send a thank you email
-    // sign person
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: "Let's become serverless conductors!!!"
+        message: 'Thank you for getting in touch!'
       })
     };
   } catch (e) {
