@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
-    "airtable": "^0.5.8",
+    "airtable": "^0.7.2",
     "contentful": "^7.0.5",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
